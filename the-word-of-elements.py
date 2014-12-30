@@ -15,7 +15,7 @@ PlayerWeapon = random.randint(0,NumWeapons)
 
 # Create a 100x100 World
 
-World=((100,100))
+World=((200,200))
 
 # Introduce the user to the game
 
