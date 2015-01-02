@@ -4,6 +4,12 @@ import os
 import pygame
 import time
 import pickle
+
+
+# check if game data file exists before asking user all their info
+print (os.path.isfile("save.dat"))
+
+
 # Define the Players
 
 Time = time.asctime()
@@ -31,9 +37,11 @@ for x in range (0, NumPlayers):
 print ("\nPlease choose a number for your player:")
 PlayerNameChoice =  int(sys.stdin.readline())
 PlayerName = Players[PlayerNameChoice]
+
 print ('Hi there %s, you\'ve been assigned a %s as your weapon!' % (PlayerName, PlayerWeapon))
-game_data = {'player-position' : 'N23 E25', 'pockets' : PlayerWeapon, 'player-name' : PlayerName , 'gold' : 158.50 }
+
+## stop here to save game status
+game_data = {'time': Time, 'player-position' : 'N23 E25', 'pockets' : PlayerWeapon, 'player-name' : PlayerName , 'gold' : 158.50 }
 save_file = open ('save.dat', 'wb')
 pickle.dump(game_data, save_file)
 save_file.close()
-
