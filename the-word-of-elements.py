@@ -2,16 +2,19 @@ import sys
 import random
 import os
 import pygame
-
+import time
+import pickle
 # Define the Players
 
-Players=['Tom','Korto', 'Jack', 'Nathaniel','David','Jerry The Warrier', 'Noah', 'Jordan']
+Time = time.asctime()
+Players=['Tom','Korto', 'Jack', 'Nathaniel','David the Wimpy Kid','Jerry The Warrier', 'Noah', 'Jordan', 'David the Great']
 NumPlayers = len (Players)
 
 # Define Weapons
 
 Weapons=['Simple Sword', 'First Shotgun', 'Stop Shield', 'Hand and half sword', 'Laser Gun', 'Forcefield']
 random.shuffle(Weapons)
+PlayerWeapon=Weapons[0]
 
 # Create a 100x100 World
 
@@ -26,5 +29,11 @@ print("Here are a list of possible players to choose from:")
 for x in range (0, NumPlayers):
 	print ('%s-%s' % (x,Players[x]))
 print ("\nPlease choose a number for your player:")
-PlayerName =  int(sys.stdin.readline())
-print ('Hi there %s, you\'ve been assigned a %s as your weapon!' % (Players[PlayerName], Weapons[0]))
+PlayerNameChoice =  int(sys.stdin.readline())
+PlayerName = Players[PlayerNameChoice]
+print ('Hi there %s, you\'ve been assigned a %s as your weapon!' % (PlayerName, PlayerWeapon))
+game_data = {'player-position' : 'N23 E25', 'pockets' : PlayerWeapon, 'player-name' : PlayerName , 'gold' : 158.50 }
+save_file = open ('save.dat', 'wb')
+pickle.dump(game_data, save_file)
+save_file.close()
+
