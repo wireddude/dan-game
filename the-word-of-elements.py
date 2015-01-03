@@ -9,10 +9,49 @@ import time
 import pickle
 import pygcurse
 
-win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
-print = win.pygprint
-input = win.input
-win.setscreencolors('green', 'black', clear=True)
+def welcome() :
+    print("/  \    /  \ ____ |  |   ____  ____   _____   ____      "    )
+    print("\   \/\/   // __ \|  | _/ ___\/  _ \ /     \_/ __ \      "   )
+    print(" \        /\  ___/|  |_\  \__(  <_> )  Y Y  \  ___/       "  )
+    print("	\__/\  /  \___  >____/\___  >____/|__|_|  /\___  >      "  )
+    print("			 \/       \/          \/            \/     \/   "   )   
+    print("___________                                                 ")
+    print("\__    ___/___                                              ")
+    print("	|    | /  _ \                                             ")
+    print("	|    |(  <_> )                                            ")
+    print("	|____| \____/                                             ")
+    print("																")														
+    print("	________                                                  ")
+    print("/  _____/_____    _____   ____                             ")
+    print("/   \  ___\__  \  /     \_/ __ \                            ")
+    print("\    \_\  \/ __ \|  Y Y  \  ___/                            ")
+    print(" \______  (____  /__|_|  /\___  >                           ")
+    print("				\/     \/      \/     \/                      "  )    
+    print("________   _____                                            ")
+    print("\_____  \_/ ____\                                           ")
+    print(" /   |   \   __\                                            ")
+    print("/    |    \  |                                              ")
+    print("\_______  /__|                                              ")
+    print("				\/                                            "  )    
+    print("___________.__                                __         ._.")
+    print("\_   _____/|  |   ____   _____   ____   _____/  |_  _____| |")
+    print(" |    __)_ |  | _/ __ \ /     \_/ __ \ /    \   __\/  ___/ |")
+    print(" |        \|  |_\  ___/|  Y Y  \  ___/|   |  \  |  \___ \ \|")
+    print("/_______  /|____/\___  >__|_|  /\___  >___|  /__| /____  >__")
+    print("		\/           \/      \/     \/     \/          \/ \/")
+
+
+
+
+
+
+
+
+# see http://inventwithpython.com/pygcurse/tutorial/ for more info
+#win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
+#print = win.pygprint
+#input = win.input
+#win.setscreencolors('green', 'black', clear=True)
 
 
 # time check
@@ -61,6 +100,7 @@ NumWeapons = len (Weapons) -1
 # Define Weapons
 
 random.shuffle(Weapons)
+random.shuffle(Monsters)
 PlayerWeapon=Weapons[0]['Name']
 
 
@@ -70,6 +110,7 @@ World=((350,350))
 
 os.system('clear')
 
+welcome()
 print("Welcome to the World of Elements! Enter if you Dare! This Game was Created by BlazeSlayer1234 and Wireddude73 \n")
 print("Here are a list of possible players to choose from:")
 for x in range (0, NumPlayers):
@@ -96,6 +137,17 @@ print ("Weapon Power: ", pWeaponPower)
 print ("Weapon Enchanted: ", pWeaponEnchanted)
 
 
+print ("You encounter a ", Monsters[0]['Name'])
+print ("Press f to fight or r to run")
+action = input()
+
+if action == 'r':
+    print ("You are a coward! You are killed by a ", Monsters[0]['Name'])
+    print ("Generations will curse your name forever!")
+else:
+    print ("You Win and Kill the ", Monsters[0]['Name'])
+
+
 ## stop here to save game status
 game_data = { 'time': Time, 'player-position' : 'N23 E25', 'pockets' : PlayerWeapon, 'player-name' : PlayerName, 'gold coins': pGold_Coins}
 ## print (game_data)
@@ -103,6 +155,6 @@ save_file = open ('save.dat', 'wb')
 pickle.dump(game_data, save_file)
 save_file.close()
 
-pygcurse.waitforkeypress()
+#pygcurse.waitforkeypress()
 
 
