@@ -8,35 +8,54 @@ import os
 import time
 import pickle
 
+# time check
+
+Time = time.asctime()
 
 # check if game data file exists before asking user all their info, right now we don't do anything with the value.
 SaveFilePresent =  os.path.isfile("save.dat")
 
+# Define the Players
+
 Players = [
- {'Name':'Korto','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89 },
- {'Name':'Tom','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29 } ,
- {'Name':'Jack','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57 },
- {'Name':'Nathaniel','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29 },
- {'Name':'David','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29 },
- {'Name':'Jerry','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29 },
- {'Name':'Noah','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29 },
- {'Name':'Jordan','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29 } ]
+ {'Name':'Korto','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Gold Coins': 100 },
+ {'Name':'Tom','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Gold Coins': 100 } ,
+ {'Name':'Jack','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57, 'Gold Coins': 100 },
+ {'Name':'Nathaniel','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Gold Coins': 100 },
+ {'Name':'David the Wimp','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Gold Coins': 100 },
+ {'Name':'Jerry','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Gold Coins': 100 },
+ {'Name':'Noah','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Gold Coins': 100 },
+ {'Name':'Jordan','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Gold Coins': 100 } ]
 
+Monsters = [
+ {'Name':'Creeper','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89 },
+ {'Name':'Enderman','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29 } ,
+ {'Name':'Killer Squid','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57 },
+ {'Name':'Fire Dragon','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9 },
+ {'Name':'Killer Kitty','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39 },
+ {'Name':'Jerry the Monster','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49 },
+ {'Name':'Larry the Killer Bug','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69 },
+ {'Name':'Baby Monster Dragon','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99 } ,
+ {'Name':'Zombie','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99 } ]
 
-# Get the Time, Define the Players
-Time = time.asctime()
-# Players=[Tom, Korto, Jack, Nathaniel, David, Jerry, Noah, Jordan]
+Weapons = [
+ {'Name': 'Simple Sword', 'Power': 38, 'Enchanted': 'FALSE'},
+ {'Name': 'Enchanted Sword', 'Power': 78, 'Enchanted': 'TRUE'},
+ {'Name': 'First Shotgun', 'Power': 55, 'Enchanted': 'FALSE'},
+ {'Name': 'Stop Shield', 'Power': 23, 'Enchanted': 'FALSE'},
+ {'Name': 'Hand and a Half Sword', 'Power': 8, 'Enchanted': 'FALSE'},
+ {'Name': 'Laser Gun', 'Power': 89, 'Enchanted': 'FALSE'} ,
+ {'Name': 'Forcefield', 'Power': 56, 'Enchanted': 'FALSE'}  ]
+
 NumPlayers = len (Players) -1
-Monsters=['Creeper','Enderman', 'Killer Squid', 'Fire Dragon','Killer Kitty','Jerry The Monster', 'Larry the Killer Bug', 'Baby Monster Dragon', 'Zombie']
-
+NumMonsters = len (Monsters) -1
+NumWeapons = len (Weapons) -1
 
 # Define Weapons
 
-Weapons=['Simple Sword', 'First Shotgun', 'Stop Shield', 'Hand and half sword', 'Laser Gun', 'Forcefield']
 random.shuffle(Weapons)
-PlayerWeapon=Weapons[0]
+PlayerWeapon=Weapons[0]['Name']
 
-# Create a 100x100 World
 
 World=((350,350))
 
@@ -50,9 +69,25 @@ for x in range (0, NumPlayers):
 	print ('%s-%s' % (x,Players[x]['Name']))
 print ("\nPlease choose a number for your player:")
 PlayerNameChoice =  int(sys.stdin.readline())
-PlayerName = Players[PlayerNameChoice]
-
+PlayerName = Players[PlayerNameChoice]['Name']
 print ('Hi there %s, you\'ve been assigned a %s as your weapon!' % (PlayerName, PlayerWeapon))
+
+pStrength = Players[PlayerNameChoice]['Strength']
+pSpeed = Players[PlayerNameChoice]['Speed']
+pDexterity = Players[PlayerNameChoice]['Dexterity']
+pMagic = Players[PlayerNameChoice]['Magic']
+pGold_Coins = Players[PlayerNameChoice]['Gold Coins']
+pWeaponPower = Weapons[0]['Power']
+pWeaponEnchanted = Weapons[0]['Enchanted']
+
+print ("Strength: ", pStrength)
+print ("Speed: ", pSpeed)
+print ("Dexterity: ", pDexterity)
+print ("Magic: ", pMagic)
+print ("Gold Coins: ", pGold_Coins)
+print ("Weapon Power: ", pWeaponPower)
+print ("Weapon Enchanted: ", pWeaponEnchanted)
+
 
 ## stop here to save game status
 game_data = {'time': Time, 'player-position' : 'N23 E25', 'pockets' : PlayerWeapon, 'player-name' : PlayerName , 'gold' : 158.50 }
