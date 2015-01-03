@@ -7,6 +7,13 @@ import random
 import os
 import time
 import pickle
+import pygcurse
+
+win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
+print = win.pygprint
+input = win.input
+win.setscreencolors('green', 'black', clear=True)
+
 
 # time check
 
@@ -68,7 +75,7 @@ print("Here are a list of possible players to choose from:")
 for x in range (0, NumPlayers):
 	print ('%s-%s' % (x,Players[x]['Name']))
 print ("\nPlease choose a number for your player:")
-PlayerNameChoice =  int(sys.stdin.readline())
+PlayerNameChoice =  int(input())
 PlayerName = Players[PlayerNameChoice]['Name']
 print ('Hi there %s, you\'ve been assigned a %s as your weapon!' % (PlayerName, PlayerWeapon))
 
@@ -90,9 +97,12 @@ print ("Weapon Enchanted: ", pWeaponEnchanted)
 
 
 ## stop here to save game status
-game_data = {'time': Time, 'player-position' : 'N23 E25', 'pockets' : PlayerWeapon, 'player-name' : PlayerName , 'gold' : 158.50 }
+game_data = { 'time': Time, 'player-position' : 'N23 E25', 'pockets' : PlayerWeapon, 'player-name' : PlayerName, 'gold coins': pGold_Coins}
+## print (game_data)
 save_file = open ('save.dat', 'wb')
 pickle.dump(game_data, save_file)
 save_file.close()
+
+pygcurse.waitforkeypress()
 
 
