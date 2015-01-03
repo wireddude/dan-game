@@ -64,9 +64,11 @@ GREEN = (0,255,0)
 BLUE = (0,0,255)
 BLACK = (0,0,0)
 
+WarningMessage = "Beware of the Kitty"
+# PersonalWarmingMessage = PlayerName ", " WarningMessage
 
 fontObj = pygame.font.Font('freesansbold.ttf',32)
-textSurfaceObj= fontObj.render('Beware of the Kitty!', True, GREEN, BLUE)
+textSurfaceObj= fontObj.render(WarningMessage , True, GREEN, BLUE)
 textRectObj = textSurfaceObj.get_rect()
 textRectObj.center = (200,150)
 
@@ -109,7 +111,7 @@ while True:
 			direction='right'
 
 	DISPLAYSURF.blit(catImg, (catx, caty))
-	DISPLAYSURF.blit(textSurfaceObj,textRectObj)
+	DISPLAYSURF.blit(textSurfaceObj, textRectObj)
 
 
 #	pixObj[480][380] = BLACK
