@@ -16,6 +16,8 @@ SaveFilePresent =  os.path.isfile("save.dat")
 Time = time.asctime()
 Players=['Tom','Korto', 'Jack', 'Nathaniel','David the Wimpy Kid','Jerry The Warrier', 'Noah', 'Jordan', 'David the Great']
 NumPlayers = len (Players) -1
+Monsters=['Creeper','Enderman', 'Killer Squid', 'Fire Dragon','Killer Kitty','Jerry The Monster', 'Larry the Killer Bug', 'Baby Monster Dragon', 'Zombie']
+
 
 # Define Weapons
 
