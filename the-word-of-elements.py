@@ -5,13 +5,13 @@ import pygame
 import time
 import pickle
 
-
-# check if game data file exists before asking user all their info
-print (os.path.isfile("save.dat"))
+from pygame.locals import *
 
 
-# Define the Players
+# check if game data file exists before asking user all their info, right now we don't do anything with the value.
+SaveFilePresent =  os.path.isfile("save.dat")
 
+# Get the Time, Define the Players
 Time = time.asctime()
 Players=['Tom','Korto', 'Jack', 'Nathaniel','David the Wimpy Kid','Jerry The Warrier', 'Noah', 'Jordan', 'David the Great']
 NumPlayers = len (Players)
@@ -45,3 +45,16 @@ game_data = {'time': Time, 'player-position' : 'N23 E25', 'pockets' : PlayerWeap
 save_file = open ('save.dat', 'wb')
 pickle.dump(game_data, save_file)
 save_file.close()
+
+
+## initialize graphics stuff
+
+pygame.init()
+DISPLAYSURF=pygame.display.set_mode((400,400))
+pygame.display.set_caption('The World Of Elements')
+while True:
+	for event in pygame.event.get():
+		if event.type == QUIT:
+			pygame.quit()
+			sys.exit()
+	pygame.display.update()
