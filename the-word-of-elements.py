@@ -59,6 +59,16 @@ catImg = pygame.image.load('cat.png')
 catx=40
 caty=40
 direction='right'
+RED = (200,0,0)
+GREEN = (0,255,0)
+BLUE = (0,0,255)
+BLACK = (0,0,0)
+
+
+fontObj = pygame.font.Font('freesansbold.ttf',32)
+textSurfaceObj= fontObj.render('Beware of the Kitty!', True, GREEN, BLUE)
+textRectObj = textSurfaceObj.get_rect()
+textRectObj.center = (200,150)
 
 
 # tried to draw a pixel here but causes a seg fault 11 on OSX. 
@@ -66,10 +76,6 @@ direction='right'
 
 
 
-RED = (200,0,0)
-GREEN = (0,255,0)
-BLUE = (0,0,255)
-BLACK = (0,0,0)
 
 
 
@@ -84,6 +90,7 @@ while True:
 			sys.exit()
 	pygame.display.update()
 	pygame.draw.rect(DISPLAYSURF, GREEN, (20,20,350,350))
+	
 	if direction == 'right':
 		catx +=5
 		if catx == 250:
@@ -102,6 +109,8 @@ while True:
 			direction='right'
 
 	DISPLAYSURF.blit(catImg, (catx, caty))
+	DISPLAYSURF.blit(textSurfaceObj,textRectObj)
+
 
 #	pixObj[480][380] = BLACK
 	
