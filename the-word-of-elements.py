@@ -1,3 +1,7 @@
+## The World of Elements v1.0
+## David and Daniel Kanter
+
+
 import sys
 import random
 import os
@@ -6,6 +10,7 @@ import time
 import pickle
 
 from pygame.locals import *
+
 
 
 # check if game data file exists before asking user all their info, right now we don't do anything with the value.
@@ -24,7 +29,7 @@ PlayerWeapon=Weapons[0]
 
 # Create a 100x100 World
 
-World=((200,200))
+World=((400,400))
 
 # Introduce the user to the game
 
@@ -51,6 +56,8 @@ save_file.close()
 
 pygame.init()
 DISPLAYSURF=pygame.display.set_mode((400,400))
+RED = (200,0,0)
+GREEN = (0,255,0)
 pygame.display.set_caption('The World Of Elements')
 while True:
 	for event in pygame.event.get():
@@ -58,3 +65,4 @@ while True:
 			pygame.quit()
 			sys.exit()
 	pygame.display.update()
+	pygame.draw.rect(DISPLAYSURF, GREEN, (20,20,350,350))
