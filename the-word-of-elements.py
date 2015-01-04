@@ -136,6 +136,10 @@ pMagic = Players[PlayerNameChoice]['Magic']
 pGold_Coins = Players[PlayerNameChoice]['Gold Coins']
 pWeaponPower = Weapons[0]['Power']
 pWeaponEnchanted = Weapons[0]['Enchanted']
+pStrength = pStrength + pWeaponPower
+
+
+
 
 print ("Strength: ", pStrength)
 #print ("Speed: ", pSpeed)
