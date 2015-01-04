@@ -150,13 +150,14 @@ def taketurn() :
     random.shuffle(Monsters)
     tMonster = Monsters[0]['Name']
     tMonster_Strength = int(Monsters[0]['Strength'])
+    print ("-----------------------------------------------------")
     print ("You encounter a ", tMonster)
     print ("with a strenth of: ", tMonster_Strength)
     print ("Press f to fight or r to run")
     action = input()
     if action == 'r':
         print ("Running to next village")
-        return ("You Lose!")
+        return ("You Ran!")
     else:
         die = roll_die()  ## assumes you pressed f since you didn't run.
         print ("Die Roll Generates: ", die)        
@@ -170,7 +171,7 @@ def taketurn() :
         else:
             return ("You Win!")
 
-## First Battle
+## Battle Loop
 
 while (pStrength > 0) :              ## as long as you have some strength, do all this in the while loop (unless you quit the game)
     Attack_Result = taketurn() 
@@ -185,10 +186,14 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
         elif action == 'n': 
             print ("Quitting Game") ## later ask if they want to save, then also instrument a load previous progress
             break
-    pStrength-= increment ## here, you lost the fight, but don't want to quit, you want to keep playing,
-    print ("You lost the battle and your strength reduced to: ", pStrength)
-    print ("Better luck next time!")
-
+    elif Attack_Result == "You Lose!":
+        pStrength-= increment ## here, you lost the fight, but don't want to quit, you want to keep playing,
+        print ("You lost the battle and your strength reduced to: ", pStrength)
+        print ("Better luck next time!")
+    elif Attack_Result == "You Ran!":     #### Below you ran, so your strength is decremented by 1, but we're still in the active while loop.
+        pStrength-= 1 ## here, you lost the fight, but don't want to quit, you want to keep playing.
+        print ("Strength reduced by running: ", pStrength)
+    
 print ("Out of Strength, Game Over!")
 
 ## stop here to save game status
