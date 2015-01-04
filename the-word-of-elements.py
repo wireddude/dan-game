@@ -1,6 +1,13 @@
-## The Game of Elements v1.0
-## Authors: BlazeSlayer1234, WiredDude73
-## nogui branch
+# The Game of Elements v1.0
+# Authors: BlazeSlayer1234, WiredDude73
+# nogui branch
+
+# see http://inventwithpython.com/pygcurse/tutorial/ for more info
+# win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
+# print = win.pygprint
+# input = win.input
+# win.setscreencolors('green', 'black', clear=True)
+
 
 import sys
 import random
@@ -44,15 +51,13 @@ def welcome() :
 
 
 
+def roll_die() :
+    return (random.randrange(1, 20))
 
 
 
-# see http://inventwithpython.com/pygcurse/tutorial/ for more info
-#win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
-#print = win.pygprint
-#input = win.input
-#win.setscreencolors('green', 'black', clear=True)
 
+    
 
 # time check
 
@@ -61,37 +66,42 @@ Time = time.asctime()
 # check if game data file exists before asking user all their info, right now we don't do anything with the value.
 SaveFilePresent =  os.path.isfile("save.dat")
 
-# Define the Players
+# Define the Players, Monsters, Weapons (later, move all this to a config file)
+
+hitpoints = 100
+increment = 5
 
 Players = [
- {'Name':'Korto','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Gold Coins': 100 },
- {'Name':'Tom','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Gold Coins': 100 } ,
- {'Name':'Jack','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57, 'Gold Coins': 100 },
- {'Name':'Nathaniel','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Gold Coins': 100 },
- {'Name':'David the Wimp','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Gold Coins': 100 },
- {'Name':'Jerry','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Gold Coins': 100 },
- {'Name':'Noah','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Gold Coins': 100 },
- {'Name':'Jordan','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Gold Coins': 100 } ]
+ {'Name':'Korto','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Gold Coins': 100, 'Hit Points': hitpoints },
+ {'Name':'Tom','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Gold Coins': 100, 'Hit Points': hitpoints } ,
+ {'Name':'Jack','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57, 'Gold Coins': 100 , 'Hit Points': hitpoints},
+ {'Name':'Nathaniel','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Gold Coins': 100, 'Hit Points': hitpoints },
+ {'Name':'David the Wimp','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Gold Coins': 100, 'Hit Points': hitpoints },
+ {'Name':'Jerry','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Gold Coins': 100, 'Hit Points': hitpoints },
+ {'Name':'Noah','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Gold Coins': 100, 'Hit Points': hitpoints },
+ {'Name':'Jordan','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Gold Coins': 100 , 'Hit Points': hitpoints} ]
 
 Monsters = [
- {'Name':'Creeper','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89 },
- {'Name':'Enderman','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29 } ,
- {'Name':'Killer Squid','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57 },
- {'Name':'Fire Dragon','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9 },
- {'Name':'Killer Kitty','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39 },
- {'Name':'Jerry the Monster','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49 },
- {'Name':'Larry the Killer Bug','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69 },
- {'Name':'Baby Monster Dragon','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99 } ,
- {'Name':'Zombie','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99 } ]
+ {'Name':'Creeper','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Hit Points': hitpoints },
+ {'Name':'Enderman','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Hit Points': hitpoints } ,
+ {'Name':'Killer Squid','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57, 'Hit Points': hitpoints },
+ {'Name':'Fire Dragon','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Hit Points': hitpoints },
+ {'Name':'Killer Kitty','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Hit Points': hitpoints },
+ {'Name':'Jerry the Monster','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Hit Points': hitpoints },
+ {'Name':'Larry the Killer Bug','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Hit Points': hitpoints },
+ {'Name':'Baby Monster Dragon','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Hit Points': hitpoints } ,
+ {'Name':'Zombie','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Hit Points': hitpoints } ]
 
 Weapons = [
  {'Name': 'Simple Sword', 'Power': 38, 'Enchanted': 'FALSE'},
  {'Name': 'Enchanted Sword', 'Power': 78, 'Enchanted': 'TRUE'},
  {'Name': 'First Shotgun', 'Power': 55, 'Enchanted': 'FALSE'},
  {'Name': 'Stop Shield', 'Power': 23, 'Enchanted': 'FALSE'},
+ {'Name': 'Dagger', 'Power': 23, 'Enchanted': 'FALSE'},
  {'Name': 'Hand and a Half Sword', 'Power': 8, 'Enchanted': 'FALSE'},
  {'Name': 'Laser Gun', 'Power': 89, 'Enchanted': 'FALSE'} ,
- {'Name': 'Forcefield', 'Power': 56, 'Enchanted': 'FALSE'}  ]
+ {'Name': 'Forcefield', 'Power': 56, 'Enchanted': 'FALSE'} ,
+ {'Name': 'Axe', 'Power': 66, 'Enchanted': 'FALSE'} ]
 
 NumPlayers = len (Players) -1
 NumMonsters = len (Monsters) -1
@@ -99,10 +109,12 @@ NumWeapons = len (Weapons) -1
 
 # Define Weapons
 # hitpoints
+# character class
+# level XP
+# experience points
 
-hitpoints = 100
+
 random.shuffle(Weapons)
-random.shuffle(Monsters)
 PlayerWeapon=Weapons[0]['Name']
 
 
@@ -131,24 +143,51 @@ pWeaponPower = Weapons[0]['Power']
 pWeaponEnchanted = Weapons[0]['Enchanted']
 
 print ("Strength: ", pStrength)
-print ("Speed: ", pSpeed)
-print ("Dexterity: ", pDexterity)
-print ("Magic: ", pMagic)
-print ("Gold Coins: ", pGold_Coins)
-print ("Weapon Power: ", pWeaponPower)
-print ("Weapon Enchanted: ", pWeaponEnchanted)
+#print ("Speed: ", pSpeed)
+#print ("Dexterity: ", pDexterity)
+#print ("Magic: ", pMagic)
+#print ("Gold Coins: ", pGold_Coins)
+#print ("Weapon Power: ", pWeaponPower)
+#print ("Weapon Enchanted: ", pWeaponEnchanted)
 
 
-print ("You encounter a ", Monsters[0]['Name'])
-print ("Press f to fight or r to run")
-action = input()
+def taketurn() :
+    random.shuffle(Monsters)
+    tMonster = Monsters[0]['Name']
+    tMonster_Strength = int(Monsters[0]['Strength'])
+    print ("You encounter a ", tMonster)
+    print ("with a strenth of: ", tMonster_Strength)
+    print ("Press f to fight or r to run")
+    action = input()
+    if action == 'r':
+        print ("You are a coward! You are killed by a ", tMonster)
+        print ("Generations will curse your name forever!")
+        return ("You Lose!")
+    else:
+        die = roll_die()
+        print ("Die Roll Generates: ", die)        
+        if die == 20:    
+            print ("You Win and Kill the ", Monsters[0]['Name'])
+            return ("You Win!")
+        elif die == 1:
+            return ("You Lose!")
+        elif tMonster_Strength >= pStrength :
+            return ("You Lose!")
+        else:
+            return ("You Win!")
 
-if action == 'r':
-    print ("You are a coward! You are killed by a ", Monsters[0]['Name'])
-    print ("Generations will curse your name forever!")
-else:
-    print ("You Win and Kill the ", Monsters[0]['Name'])
 
+Attack_Result = taketurn()
+
+if Attack_Result == "You Win!":
+    pStrength+= increment
+    print (Attack_Result)
+    print ("You Strength has been incremented to ", pStrength)
+    print ("Play Again? (y/n)")
+    action = input()
+    if action == 'y':
+        Attack_Result = taketurn()
+print ("You Lose")
 
 ## stop here to save game status
 game_data = { 'time': Time, 'player-position' : 'N23 E25', 'pockets' : PlayerWeapon, 'player-name' : PlayerName, 'gold coins': pGold_Coins}
