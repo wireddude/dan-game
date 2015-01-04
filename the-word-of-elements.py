@@ -54,11 +54,6 @@ def welcome() :
 def roll_die() :
     return (random.randrange(1, 20))
 
-
-
-
-    
-
 # time check
 
 Time = time.asctime()
@@ -160,14 +155,13 @@ def taketurn() :
     print ("Press f to fight or r to run")
     action = input()
     if action == 'r':
-        print ("You are a coward! You are killed by a ", tMonster)
-        print ("Generations will curse your name forever!")
+        print ("Running to next village")
         return ("You Lose!")
     else:
-        die = roll_die()
+        die = roll_die()  ## assumes you pressed f since you didn't run.
         print ("Die Roll Generates: ", die)        
         if die == 20:    
-            print ("You Win and Kill the ", Monsters[0]['Name'])
+            print ("You Win and Kill the ", tMonster)
             return ("You Win!")
         elif die == 1:
             return ("You Lose!")
@@ -176,18 +170,26 @@ def taketurn() :
         else:
             return ("You Win!")
 
+## First Battle
 
-Attack_Result = taketurn()
+while (pStrength > 0) :              ## as long as you have some strength, do all this in the while loop (unless you quit the game)
+    Attack_Result = taketurn() 
+    if Attack_Result == "You Win!":  ## if you win the fight, do all this
+        pStrength+= increment
+        print (Attack_Result)
+        print ("Your Strength has been incremented to ", pStrength)
+        print ("Play Again? (y/n)")
+        action = input()
+        if action == 'y':
+            Attack_Result = taketurn()
+        elif action == 'n': 
+            print ("Quitting Game") ## later ask if they want to save, then also instrument a load previous progress
+            break
+    pStrength-= increment ## here, you lost the fight, but don't want to quit, you want to keep playing,
+    print ("You lost the battle and your strength reduced to: ", pStrength)
+    print ("Better luck next time!")
 
-if Attack_Result == "You Win!":
-    pStrength+= increment
-    print (Attack_Result)
-    print ("You Strength has been incremented to ", pStrength)
-    print ("Play Again? (y/n)")
-    action = input()
-    if action == 'y':
-        Attack_Result = taketurn()
-print ("You Lose")
+print ("Out of Strength, Game Over!")
 
 ## stop here to save game status
 game_data = { 'time': Time, 'player-position' : 'N23 E25', 'pockets' : PlayerWeapon, 'player-name' : PlayerName, 'gold coins': pGold_Coins}
