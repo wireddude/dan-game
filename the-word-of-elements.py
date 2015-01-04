@@ -16,7 +16,57 @@ import time
 import pickle
 import pygcurse
 
+# Define the Players, Monsters, Weapons (later, move all this to a config file)
+hitpoints = 100
+increment = 5
+World=((350,350))
+# time check
+Time = time.asctime()
+# check if game data file exists before asking user all their info, right now we don't do anything with the value.
+SaveFilePresent =  os.path.isfile("save.dat")
+
+  
+Players = [
+     {'Name':'Korto','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Gold Coins': 100, 'Hit Points': hitpoints },
+     {'Name':'Tom','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Gold Coins': 100, 'Hit Points': hitpoints } ,
+     {'Name':'Jack','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57, 'Gold Coins': 100 , 'Hit Points': hitpoints},
+     {'Name':'Nathaniel','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Gold Coins': 100, 'Hit Points': hitpoints },
+     {'Name':'David the Wimp','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Gold Coins': 100, 'Hit Points': hitpoints },
+     {'Name':'Jerry','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Gold Coins': 100, 'Hit Points': hitpoints },
+     {'Name':'Noah','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Gold Coins': 100, 'Hit Points': hitpoints },
+     {'Name':'Jordan','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Gold Coins': 100 , 'Hit Points': hitpoints} ]
+
+Monsters = [
+     {'Name':'Creeper','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Hit Points': hitpoints },
+     {'Name':'Enderman','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Hit Points': hitpoints } ,
+     {'Name':'Killer Squid','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57, 'Hit Points': hitpoints },
+     {'Name':'Fire Dragon','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Hit Points': hitpoints },
+     {'Name':'Killer Kitty','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Hit Points': hitpoints },
+     {'Name':'Jerry the Monster','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Hit Points': hitpoints },
+     {'Name':'Larry the Killer Bug','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Hit Points': hitpoints },
+     {'Name':'Baby Monster Dragon','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Hit Points': hitpoints } ,
+     {'Name':'Zombie','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Hit Points': hitpoints } ]
+
+Weapons = [
+     {'Name': 'Simple Sword', 'Power': 38, 'Enchanted': 'FALSE'},
+     {'Name': 'Enchanted Sword', 'Power': 78, 'Enchanted': 'TRUE'},
+     {'Name': 'First Shotgun', 'Power': 55, 'Enchanted': 'FALSE'},
+     {'Name': 'Stop Shield', 'Power': 23, 'Enchanted': 'FALSE'},
+     {'Name': 'Dagger', 'Power': 23, 'Enchanted': 'FALSE'},
+     {'Name': 'Hand and a Half Sword', 'Power': 8, 'Enchanted': 'FALSE'},
+     {'Name': 'Laser Gun', 'Power': 89, 'Enchanted': 'FALSE'} ,
+     {'Name': 'Forcefield', 'Power': 56, 'Enchanted': 'FALSE'} ,
+     {'Name': 'Axe', 'Power': 66, 'Enchanted': 'FALSE'} ]
+
+NumPlayers = len (Players) -1
+NumMonsters = len (Monsters) -1
+NumWeapons = len (Weapons) -1
+random.shuffle(Weapons)
+PlayerWeapon=Weapons[0]['Name']
+
+
 def welcome() :
+    os.system('clear')
     print("/  \    /  \ ____ |  |   ____  ____   _____   ____      "    )
     print("\   \/\/   // __ \|  | _/ ___\/  _ \ /     \_/ __ \      "   )
     print(" \        /\  ___/|  |_\  \__(  <_> )  Y Y  \  ___/       "  )
@@ -46,84 +96,56 @@ def welcome() :
     print(" |        \|  |_\  ___/|  Y Y  \  ___/|   |  \  |  \___ \ \|")
     print("/_______  /|____/\___  >__|_|  /\___  >___|  /__| /____  >__")
     print("		\/           \/      \/     \/     \/          \/ \/")
-
-
-
-
+    print ("-----------------------------------------------------------")
+    print("Welcome to the Game of Elements! Enter if you Dare! This Game was Created by BlazeSlayer1234 and Wireddude73 \n")
+    
+    
+ 
 
 def roll_die() :
     return (random.randrange(1, 20))
 
-# time check
-
-Time = time.asctime()
-
-# check if game data file exists before asking user all their info, right now we don't do anything with the value.
-SaveFilePresent =  os.path.isfile("save.dat")
-
-# Define the Players, Monsters, Weapons (later, move all this to a config file)
-
-hitpoints = 100
-increment = 5
-
-Players = [
- {'Name':'Korto','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Gold Coins': 100, 'Hit Points': hitpoints },
- {'Name':'Tom','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Gold Coins': 100, 'Hit Points': hitpoints } ,
- {'Name':'Jack','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57, 'Gold Coins': 100 , 'Hit Points': hitpoints},
- {'Name':'Nathaniel','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Gold Coins': 100, 'Hit Points': hitpoints },
- {'Name':'David the Wimp','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Gold Coins': 100, 'Hit Points': hitpoints },
- {'Name':'Jerry','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Gold Coins': 100, 'Hit Points': hitpoints },
- {'Name':'Noah','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Gold Coins': 100, 'Hit Points': hitpoints },
- {'Name':'Jordan','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Gold Coins': 100 , 'Hit Points': hitpoints} ]
-
-Monsters = [
- {'Name':'Creeper','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Hit Points': hitpoints },
- {'Name':'Enderman','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Hit Points': hitpoints } ,
- {'Name':'Killer Squid','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57, 'Hit Points': hitpoints },
- {'Name':'Fire Dragon','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Hit Points': hitpoints },
- {'Name':'Killer Kitty','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Hit Points': hitpoints },
- {'Name':'Jerry the Monster','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Hit Points': hitpoints },
- {'Name':'Larry the Killer Bug','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Hit Points': hitpoints },
- {'Name':'Baby Monster Dragon','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Hit Points': hitpoints } ,
- {'Name':'Zombie','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Hit Points': hitpoints } ]
-
-Weapons = [
- {'Name': 'Simple Sword', 'Power': 38, 'Enchanted': 'FALSE'},
- {'Name': 'Enchanted Sword', 'Power': 78, 'Enchanted': 'TRUE'},
- {'Name': 'First Shotgun', 'Power': 55, 'Enchanted': 'FALSE'},
- {'Name': 'Stop Shield', 'Power': 23, 'Enchanted': 'FALSE'},
- {'Name': 'Dagger', 'Power': 23, 'Enchanted': 'FALSE'},
- {'Name': 'Hand and a Half Sword', 'Power': 8, 'Enchanted': 'FALSE'},
- {'Name': 'Laser Gun', 'Power': 89, 'Enchanted': 'FALSE'} ,
- {'Name': 'Forcefield', 'Power': 56, 'Enchanted': 'FALSE'} ,
- {'Name': 'Axe', 'Power': 66, 'Enchanted': 'FALSE'} ]
-
-NumPlayers = len (Players) -1
-NumMonsters = len (Monsters) -1
-NumWeapons = len (Weapons) -1
-
-# Define Weapons
-# hitpoints
-# character class
-# level XP
-# experience points
 
 
-random.shuffle(Weapons)
-PlayerWeapon=Weapons[0]['Name']
+def taketurn() :
+    random.shuffle(Monsters)
+    tMonster = Monsters[0]['Name']
+    tMonster_Strength = int(Monsters[0]['Strength'])
+    print ("-----------------------------------------------------")
+    print ("You encounter a ", tMonster)
+    print ("with a strenth of: ", tMonster_Strength)
+    print ("Press f to fight or r to run, q to quit")
+    action = input()
+    if action == 'r':
+        print ("Running to next village. . . ")
+        return ("You Ran!")
+    elif action == 'f':
+        die = roll_die()  
+        print ("Die Roll Generates: ", die)        
+        if die == 20:    
+            print ("You Win and Kill the ", tMonster)
+            return ("You Win!")
+        elif die == 1:
+            print("You rolled a 1")
+            return ("You Lose!")            
+        ## at this point they didn't role a 1 or a 20 so we're just going my their strength comparison
+        elif tMonster_Strength >= pStrength :
+            print ("You Lose!")
+            return ("You Lose!")
+        else:
+            print ("You Win!")
+            return ("You Win!")
+    elif action == 'q':
+        print ("Quitting Game") ## later ask if they want to save, then also instrument a load previous progress
+        return ("Quit")
 
+welcome() ## display welcome message
 
-World=((350,350))
+## Choose Player
 
-# Introduce the user to the game
-
-os.system('clear')
-
-welcome()
-print("Welcome to the Game of Elements! Enter if you Dare! This Game was Created by BlazeSlayer1234 and Wireddude73 \n")
 print("Here are a list of possible players to choose from:")
 for x in range (0, NumPlayers):
-	print ('%s-%s' % (x,Players[x]['Name']))
+    print ('%s-%s' % (x,Players[x]['Name']))
 print ("\nPlease choose a number for your player:")
 PlayerNameChoice =  int(input())
 PlayerName = Players[PlayerNameChoice]['Name']
@@ -137,10 +159,6 @@ pGold_Coins = Players[PlayerNameChoice]['Gold Coins']
 pWeaponPower = Weapons[0]['Power']
 pWeaponEnchanted = Weapons[0]['Enchanted']
 pStrength = pStrength + pWeaponPower
-
-
-
-
 print ("Strength: ", pStrength)
 #print ("Speed: ", pSpeed)
 #print ("Dexterity: ", pDexterity)
@@ -150,46 +168,13 @@ print ("Strength: ", pStrength)
 #print ("Weapon Enchanted: ", pWeaponEnchanted)
 
 
-def taketurn() :
-    random.shuffle(Monsters)
-    tMonster = Monsters[0]['Name']
-    tMonster_Strength = int(Monsters[0]['Strength'])
-    print ("-----------------------------------------------------")
-    print ("You encounter a ", tMonster)
-    print ("with a strenth of: ", tMonster_Strength)
-    print ("Press f to fight or r to run")
-    action = input()
-    if action == 'r':
-        print ("Running to next village")
-        return ("You Ran!")
-    else:
-        die = roll_die()  ## assumes you pressed f since you didn't run.
-        print ("Die Roll Generates: ", die)        
-        if die == 20:    
-            print ("You Win and Kill the ", tMonster)
-            return ("You Win!")
-        elif die == 1:
-            return ("You Lose!")
-        elif tMonster_Strength >= pStrength :
-            return ("You Lose!")
-        else:
-            return ("You Win!")
-
 ## Battle Loop
 
 while (pStrength > 0) :              ## as long as you have some strength, do all this in the while loop (unless you quit the game)
     Attack_Result = taketurn() 
     if Attack_Result == "You Win!":  ## if you win the fight, do all this
         pStrength+= increment
-        print (Attack_Result)
         print ("Your Strength has been incremented to ", pStrength)
-        print ("Play Again? (y/n)")
-        action = input()
-        if action == 'y':
-            Attack_Result = taketurn()
-        elif action == 'n': 
-            print ("Quitting Game") ## later ask if they want to save, then also instrument a load previous progress
-            break
     elif Attack_Result == "You Lose!":
         pStrength-= increment ## here, you lost the fight, but don't want to quit, you want to keep playing,
         print ("You lost the battle and your strength reduced to: ", pStrength)
@@ -197,7 +182,9 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
     elif Attack_Result == "You Ran!":     #### Below you ran, so your strength is decremented by 1, but we're still in the active while loop.
         pStrength-= 1 ## here, you lost the fight, but don't want to quit, you want to keep playing.
         print ("Strength reduced by running: ", pStrength)
-    
+    elif Attack_Result == "Quit":
+        break    
+
 print ("Out of Strength, Game Over!")
 
 ## stop here to save game status
