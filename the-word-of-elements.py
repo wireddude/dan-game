@@ -1,4 +1,4 @@
-## The World of Elements v1.0
+## The Game of Elements v1.0
 ## Authors: BlazeSlayer1234, WiredDude73
 ## nogui branch
 
@@ -98,7 +98,9 @@ NumMonsters = len (Monsters) -1
 NumWeapons = len (Weapons) -1
 
 # Define Weapons
+# hitpoints
 
+hitpoints = 100
 random.shuffle(Weapons)
 random.shuffle(Monsters)
 PlayerWeapon=Weapons[0]['Name']
@@ -111,7 +113,7 @@ World=((350,350))
 os.system('clear')
 
 welcome()
-print("Welcome to the World of Elements! Enter if you Dare! This Game was Created by BlazeSlayer1234 and Wireddude73 \n")
+print("Welcome to the Game of Elements! Enter if you Dare! This Game was Created by BlazeSlayer1234 and Wireddude73 \n")
 print("Here are a list of possible players to choose from:")
 for x in range (0, NumPlayers):
 	print ('%s-%s' % (x,Players[x]['Name']))
