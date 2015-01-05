@@ -19,7 +19,7 @@ import pygcurse
 # Define the Players, Monsters, Weapons (later, move all this to a config file)
 hitpoints = 100
 increment = 5
-World=((350,350))
+
 # time check
 Time = time.asctime()
 # check if game data file exists before asking user all their info, right now we don't do anything with the value.
@@ -63,6 +63,31 @@ NumMonsters = len (Monsters) -1
 NumWeapons = len (Weapons) -1
 random.shuffle(Weapons)
 PlayerWeapon=Weapons[0]['Name']
+
+
+
+## Build a 5x5 zero index World Matrix as a list of lists first, then make it more random after you learn more
+## has M for monster, G for gold, V for villiage and P for portal (to next level, or you can just win).
+
+matrix = [['M',' ','M',' ','M'], 
+          [' ','M','M',' ',' '], 
+          ['G',' ',' ','G','V'], 
+          ['V','M',' ','V','M'], 
+          [' ',' ','M','P',' ']]
+
+## Print Matrix Out
+
+print(' |-------------------|')
+print(' | ' + matrix[0][0] + ' | ' + matrix[0][1] + ' | ' + matrix[0][2] + ' | ' + matrix[0][3] + ' | ' + matrix[0][4] + " | ")
+print(' |-------------------|')
+print(' | ' + matrix[1][0] + ' | ' + matrix[1][1] + ' | ' + matrix[1][2] + ' | ' + matrix[1][3] + ' | ' + matrix[1][4] + " | ")
+print(' |-------------------|')
+print(' | ' + matrix[2][0] + ' | ' + matrix[2][1] + ' | ' + matrix[2][2] + ' | ' + matrix[2][3] + ' | ' + matrix[2][4] + " | ")
+print(' |-------------------|')
+print(' | ' + matrix[3][0] + ' | ' + matrix[3][1] + ' | ' + matrix[3][2] + ' | ' + matrix[3][3] + ' | ' + matrix[3][4] + " | ")
+print(' |-------------------|')
+print(' | ' + matrix[4][0] + ' | ' + matrix[4][1] + ' | ' + matrix[4][2] + ' | ' + matrix[4][3] + ' | ' + matrix[4][4] + " | ")
+print(' |-------------------|')
 
 
 def welcome() :
@@ -114,7 +139,7 @@ def taketurn() :
     print ("-----------------------------------------------------")
     print ("You encounter a ", tMonster)
     print ("with a strenth of: ", tMonster_Strength)
-    print ("Press f to fight or r to run, q to quit")
+    print ("Press f to fight, r to run, q to quit")
     action = input()
     if action == 'r':
         print ("Running to next village. . . ")
