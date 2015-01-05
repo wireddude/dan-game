@@ -3,10 +3,6 @@
 # nogui branch
 
 # see http://inventwithpython.com/pygcurse/tutorial/ for more info
-# win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
-# print = win.pygprint
-# input = win.input
-# win.setscreencolors('green', 'black', clear=True)
 
 
 import sys
@@ -16,9 +12,15 @@ import time
 import pickle
 import pygcurse
 
+win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
+print = win.pygprint
+input = win.input
+win.setscreencolors('green', 'black', clear=True)
+
+
 # Define the Players, Monsters, Weapons (later, move all this to a config file)
-hitpoints = 100
-increment = 5
+hitpoints = 10
+increment = 9
 
 # time check
 Time = time.asctime()
@@ -27,25 +29,26 @@ SaveFilePresent =  os.path.isfile("save.dat")
 
   
 Players = [
-     {'Name':'Korto','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Gold Coins': 100, 'Hit Points': hitpoints },
+     {'Name':'Kuruto','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Gold Coins': 100, 'Hit Points': hitpoints },
      {'Name':'Tom','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Gold Coins': 100, 'Hit Points': hitpoints } ,
      {'Name':'Jack','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57, 'Gold Coins': 100 , 'Hit Points': hitpoints},
      {'Name':'Nathaniel','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Gold Coins': 100, 'Hit Points': hitpoints },
+     {'Name':'Kibou','Strength': 290, 'Speed':290, 'Magic':30,'Dexterity': 10, 'Gold Coins': 50 , 'Hit Points': hitpoints } ,
      {'Name':'David the Wimp','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Gold Coins': 100, 'Hit Points': hitpoints },
      {'Name':'Jerry','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Gold Coins': 100, 'Hit Points': hitpoints },
      {'Name':'Noah','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Gold Coins': 100, 'Hit Points': hitpoints },
-     {'Name':'Jordan','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Gold Coins': 100 , 'Hit Points': hitpoints} ]
-
+     {'Name':'Jordan','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Gold Coins': 100 , 'Hit Points': hitpoints } ]
+    
 Monsters = [
-     {'Name':'Creeper','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Hit Points': hitpoints },
-     {'Name':'Enderman','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Hit Points': hitpoints } ,
+     {'Name':'Creeper','Strength': 51, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Hit Points': hitpoints },
+     {'Name':'Enderman','Strength': 94, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Hit Points': hitpoints } ,
      {'Name':'Killer Squid','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57, 'Hit Points': hitpoints },
-     {'Name':'Fire Dragon','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Hit Points': hitpoints },
-     {'Name':'Killer Kitty','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Hit Points': hitpoints },
-     {'Name':'Jerry the Monster','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Hit Points': hitpoints },
-     {'Name':'Larry the Killer Bug','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Hit Points': hitpoints },
-     {'Name':'Baby Monster Dragon','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Hit Points': hitpoints } ,
-     {'Name':'Zombie','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Hit Points': hitpoints } ]
+     {'Name':'Fire Dragon','Strength': 91, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Hit Points': hitpoints },
+     {'Name':'Killer Kitty','Strength': 19, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Hit Points': hitpoints },
+     {'Name':'Jerry the Monster','Strength': 20, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Hit Points': hitpoints },
+     {'Name':'Larry the Killer Bug','Strength': 10, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Hit Points': hitpoints },
+     {'Name':'Baby Monster Dragon','Strength': 6, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Hit Points': hitpoints },
+     {'Name':'Zombie','Strength': 6, 'Speed': 46, 'Magic': 100, 'Dexterity': 99, 'Hit Points': hitpoints } ]
 
 Weapons = [
      {'Name': 'Simple Sword', 'Power': 38, 'Enchanted': 'FALSE'},
@@ -66,28 +69,29 @@ PlayerWeapon=Weapons[0]['Name']
 
 
 
-## Build a 5x5 zero index World Matrix as a list of lists first, then make it more random after you learn more
-## has M for monster, G for gold, V for villiage and P for portal (to next level, or you can just win).
+## Build a 9x9 zero index World Matrix as a list of lists first, then make it more random after you learn more
+## has M for money, H for hostile,D for dimension (to the next world,orand P for people (to next level, or you can just win).
 
-matrix = [['M',' ','M',' ','M'], 
-          [' ','M','M',' ',' '], 
-          ['G',' ',' ','G','V'], 
-          ['V','M',' ','V','M'], 
-          [' ',' ','M','P',' ']]
+matrix = [['H',' ','H',' ','H'], 
+          [' ','M','H','P',' '], 
+          ['P','H','H','H','P'], 
+          ['H',' ','H',' ','M'], 
+          [' ','H','H','P','D']]
 
 ## Print Matrix Out
 
-print(' |-------------------|')
-print(' | ' + matrix[0][0] + ' | ' + matrix[0][1] + ' | ' + matrix[0][2] + ' | ' + matrix[0][3] + ' | ' + matrix[0][4] + " | ")
-print(' |-------------------|')
-print(' | ' + matrix[1][0] + ' | ' + matrix[1][1] + ' | ' + matrix[1][2] + ' | ' + matrix[1][3] + ' | ' + matrix[1][4] + " | ")
-print(' |-------------------|')
-print(' | ' + matrix[2][0] + ' | ' + matrix[2][1] + ' | ' + matrix[2][2] + ' | ' + matrix[2][3] + ' | ' + matrix[2][4] + " | ")
-print(' |-------------------|')
-print(' | ' + matrix[3][0] + ' | ' + matrix[3][1] + ' | ' + matrix[3][2] + ' | ' + matrix[3][3] + ' | ' + matrix[3][4] + " | ")
-print(' |-------------------|')
-print(' | ' + matrix[4][0] + ' | ' + matrix[4][1] + ' | ' + matrix[4][2] + ' | ' + matrix[4][3] + ' | ' + matrix[4][4] + " | ")
-print(' |-------------------|')
+def printmatrix() :
+  print(' |-------------------|')
+  print(' | ' + matrix[0][0] + ' | ' + matrix[0][1] + ' | ' + matrix[0][2] + ' | ' + matrix[0][3] + ' | ' + matrix[0][4] + " | ")
+  print(' |-------------------|')
+  print(' | ' + matrix[1][0] + ' | ' + matrix[1][1] + ' | ' + matrix[1][2] + ' | ' + matrix[1][3] + ' | ' + matrix[1][4] + " | ")
+  print(' |-------------------|')
+  print(' | ' + matrix[2][0] + ' | ' + matrix[2][1] + ' | ' + matrix[2][2] + ' | ' + matrix[2][3] + ' | ' + matrix[2][4] + " | ")
+  print(' |-------------------|')
+  print(' | ' + matrix[3][0] + ' | ' + matrix[3][1] + ' | ' + matrix[3][2] + ' | ' + matrix[3][3] + ' | ' + matrix[3][4] + " | ")
+  print(' |-------------------|')
+  print(' | ' + matrix[4][0] + ' | ' + matrix[4][1] + ' | ' + matrix[4][2] + ' | ' + matrix[4][3] + ' | ' + matrix[4][4] + " | ")
+  print(' |-------------------|')
 
 
 def welcome() :
@@ -136,6 +140,7 @@ def taketurn() :
     random.shuffle(Monsters)
     tMonster = Monsters[0]['Name']
     tMonster_Strength = int(Monsters[0]['Strength'])
+    printmatrix()
     print ("-----------------------------------------------------")
     print ("You encounter a ", tMonster)
     print ("with a strenth of: ", tMonster_Strength)
@@ -219,6 +224,6 @@ save_file = open ('save.dat', 'wb')
 pickle.dump(game_data, save_file)
 save_file.close()
 
-#pygcurse.waitforkeypress()
+pygcurse.waitforkeypress()
 
 
