@@ -70,10 +70,11 @@ PlayerWeapon=Weapons[0]['Name']
 
 
 ## Build a 9x9 zero index World Matrix as a list of lists first, then make it more random after you learn more
-## has M for money, H for hostile,D for dimension (to the next world,orand P for people (to next level, or you can just win).
+## has M for money, H for hostile,D for dimension (to the next world or touch and P for people (to next level, or you can just win). 
+## you start at the *
 
 matrix = [['H',' ','H',' ','H'], 
-          [' ','M','H','P',' '], 
+          ['*','M','H','P',' '], 
           ['P','H','H','H','P'], 
           ['H',' ','H',' ','M'], 
           [' ','H','H','P','D']]
@@ -93,6 +94,8 @@ def printmatrix() :
   print(' | ' + matrix[4][0] + ' | ' + matrix[4][1] + ' | ' + matrix[4][2] + ' | ' + matrix[4][3] + ' | ' + matrix[4][4] + " | ")
   print(' |-------------------|')
 
+def getplayerpos() :
+  return (1,0)
 
 def welcome() :
     os.system('clear')
@@ -136,24 +139,23 @@ def roll_die() :
 
 
 
-def taketurn() :
+def dobattle() :
     random.shuffle(Monsters)
     tMonster = Monsters[0]['Name']
     tMonster_Strength = int(Monsters[0]['Strength'])
-    printmatrix()
     print ("-----------------------------------------------------")
     print ("You encounter a ", tMonster)
     print ("with a strenth of: ", tMonster_Strength)
     print ("Press f to fight, r to run, q to quit")
     action = input()
     if action == 'r':
-        print ("Running to next village. . . ")
+        print ("Running . . . ")
         return ("You Ran!")
     elif action == 'f':
         die = roll_die()  
         print ("Die Roll Generates: ", die)        
         if die == 20:    
-            print ("You Win and Kill the ", tMonster)
+            print ("You Rolled a 20! You Win and Kill the ", tMonster)
             return ("You Win!")
         elif die == 1:
             print("You rolled a 1")
@@ -169,7 +171,7 @@ def taketurn() :
         print ("Quitting Game") ## later ask if they want to save, then also instrument a load previous progress
         return ("Quit")
 
-welcome() ## display welcome message
+# welcome() ## display welcome message
 
 ## Choose Player
 
@@ -198,10 +200,47 @@ print ("Strength: ", pStrength)
 #print ("Weapon Enchanted: ", pWeaponEnchanted)
 
 
-## Battle Loop
+## As long as you have some strength, do all this in the while loop (unless you quit the game)
 
 while (pStrength > 0) :              ## as long as you have some strength, do all this in the while loop (unless you quit the game)
-    Attack_Result = taketurn() 
+    
+    
+ ## Start your first move on the matrix
+## find out where you are '*' matrix[0][1] for our purposes
+## ask player what direction they want to go
+## w = up, s = down, a = left, d = right
+    playerpos = getplayerpos()
+    printmatrix()
+    print('what direction do you want to go w=up, s=down, a=left, d=right')
+    direction = input()
+    print (direction)
+    #x=playerpos[0]
+    #y=playerpos[1]
+    if direction == 'w':
+      print ("w") # make current playerpos blank ' ' and change location of '*' playerpos from playerpos[0][1] to playerpos [0][0] 
+      getLetter = matrix[playerpos[0]-1][playerpos[1]]  # gets the letter at the new position they're about to walk to
+      matrix[playerpos[0]][playerpos[1]] = ' ' # makes the current position a space
+      matrix[playerpos[0]-1][playerpos[1]] = '*' # draws the marker of where you are in the new position
+      print ("You meet a", getLetter)
+      printmatrix()
+    elif direction == 's':
+      print ("s")
+    elif direction == 'a':
+      print ("a")
+    elif direction == 'd':
+      print ("d")
+
+      
+## move player to appropriate square
+## If H (hostile)  take durn, do battle
+## If M for money add random number between 5-10 gold coins
+## If D for dimension a new world generates, they level up
+## If P people you move to a random P
+## If ' ' then nothing, take another turn   
+    
+
+    
+    Attack_Result = dobattle() 
     if Attack_Result == "You Win!":  ## if you win the fight, do all this
         pStrength+= increment
         print ("Your Strength has been incremented to ", pStrength)
