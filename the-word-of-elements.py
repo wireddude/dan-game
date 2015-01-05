@@ -214,13 +214,13 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
     print('what direction do you want to go w=up, s=down, a=left, d=right')
     direction = input()
     print (direction)
-    #x=playerpos[0]
-    #y=playerpos[1]
+    x=playerpos[0]
+    y=playerpos[1]
     if direction == 'w':
       print ("w") # make current playerpos blank ' ' and change location of '*' playerpos from playerpos[0][1] to playerpos [0][0] 
-      getLetter = matrix[playerpos[0]-1][playerpos[1]]  # gets the letter at the new position they're about to walk to
-      matrix[playerpos[0]][playerpos[1]] = ' ' # makes the current position a space
-      matrix[playerpos[0]-1][playerpos[1]] = '*' # draws the marker of where you are in the new position
+      getLetter = matrix[x-1][y]  # gets the letter at the new position they're about to walk to
+      matrix[x][y] = ' ' # makes the current position a space
+      matrix[x-1][y] = '*' # draws the marker of where you are in the new position
       print ("You meet a", getLetter)
       printmatrix()
     elif direction == 's':
