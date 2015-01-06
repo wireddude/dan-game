@@ -11,11 +11,12 @@ import os
 import time
 import pickle
 import pygcurse
+import pygame
 
 win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
 print = win.pygprint
 input = win.input
-win.setscreencolors('green', 'black', clear=True)
+win.setscreencolors('white', 'black', clear=True)
 
 
 # Define the Players, Monsters, Weapons (later, move all this to a config file)
@@ -199,6 +200,7 @@ print ("Strength: ", pStrength)
 #print ("Weapon Power: ", pWeaponPower)
 #print ("Weapon Enchanted: ", pWeaponEnchanted)
 
+playerpos = getplayerpos()
 
 ## As long as you have some strength, do all this in the while loop (unless you quit the game)
 
@@ -210,36 +212,32 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
 ## ask player what direction they want to go
 ## w = up, s = down, a = left, d = right
 
-   playerpos = getplayerpos()
-
-
-   while (1):
-     printmatrix()
-     print('what direction do you want to go w=up, s=down, a=left, d=right')
-     direction = input()
-     print (direction)
-     row=playerpos[0]
-     col=playerpos[1]
-     if direction == 'w': # move player UP
-       getLetter = matrix[row-1][col]  # gets the letter at the new position they're about to walk to
-       matrix[row][col] = ' ' # makes the current position a space
-       matrix[row-1][col] = '*' # draws the marker of where you are in the new position
-       playerpos = (row-1,col)
-     elif direction == 's': # mobe player DOWN
-       getLetter = matrix[row+1][col]  # gets the letter at the new position they're about to walk to
-       matrix[row][col] = ' ' # makes the current position a space
-       matrix[row+1][col] = '*' # draws the marker of where you are in the new position 
-       playerpos = (row+1, col)
-     elif direction == 'a': # move player LEFT
-       getLetter = matrix[row][col-1]  # gets the letter at the new position they're about to walk to
-       matrix[row][col] = ' ' # makes the current position a space
-       matrix[row][col-1] = '*' # draws the marker of where you are in the new position 
-       playerpos = (row, col-1)
-     elif direction == 'd': # move player RIGHT
-       getLetter = matrix[row][col+1]  # gets the letter at the new position they're about to walk to
-       matrix[row][col] = ' ' # makes the current position a space
-       matrix[row][col+1] = '*' # draws the marker of where you are in the new position 
-       playerpos = (row, col+1)  
+   printmatrix()
+   print('what direction do you want to go w=up, s=down, a=left, d=right')
+   direction = input()
+   print (direction)
+   row=playerpos[0]
+   col=playerpos[1]
+   if direction == 'w': # move player UP
+     getLetter = matrix[row-1][col]  # gets the letter at the new position they're about to walk to
+     matrix[row][col] = ' ' # makes the current position a space
+     matrix[row-1][col] = '*' # draws the marker of where you are in the new position
+     playerpos = (row-1,col)
+   elif direction == 's': # mobe player DOWN
+     getLetter = matrix[row+1][col]  # gets the letter at the new position they're about to walk to
+     matrix[row][col] = ' ' # makes the current position a space
+     matrix[row+1][col] = '*' # draws the marker of where you are in the new position 
+     playerpos = (row+1, col)
+   elif direction == 'a': # move player LEFT
+     getLetter = matrix[row][col-1]  # gets the letter at the new position they're about to walk to
+     matrix[row][col] = ' ' # makes the current position a space
+     matrix[row][col-1] = '*' # draws the marker of where you are in the new position 
+     playerpos = (row, col-1)
+   elif direction == 'd': # move player RIGHT
+     getLetter = matrix[row][col+1]  # gets the letter at the new position they're about to walk to
+     matrix[row][col] = ' ' # makes the current position a space
+     matrix[row][col+1] = '*' # draws the marker of where you are in the new position 
+     playerpos = (row, col+1)  
     
 ## move player to appropriate square
 ## If H (hostile)  take durn, do battle
