@@ -222,10 +222,13 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
       matrix[x][y] = ' ' # makes the current position a space
       matrix[x-1][y] = '*' # draws the marker of where you are in the new position
       print ("You meet a", getLetter)
-
       printmatrix()
     elif direction == 's':
-      print ("s")
+      getLetter = matrix[x+1][y]  # gets the letter at the new position they're about to walk to
+      matrix[x][y] = ' ' # makes the current position a space
+      matrix[x+1][y] = '*' # draws the marker of where you are in the new position 
+      print ("You meet a", getLetter)
+      printmatrix()
     elif direction == 'a':
       print ("a")
     elif direction == 'd':
