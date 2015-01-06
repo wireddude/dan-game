@@ -74,7 +74,7 @@ PlayerWeapon=Weapons[0]['Name']
 ## you start at the *
 
 matrix = [['H',' ','H',' ','H'], 
-          ['*','M','H','P',' '], 
+          [' ','*','H','P',' '], 
           ['P','H','H','H','P'], 
           ['H',' ','H',' ','M'], 
           [' ','H','H','P','D']]
@@ -95,7 +95,7 @@ def printmatrix() :
   print(' |-------------------|')
 
 def getplayerpos() :
-  return (1,0)
+  return (1,1)
 
 def welcome() :
     os.system('clear')
@@ -223,15 +223,20 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
       matrix[x-1][y] = '*' # draws the marker of where you are in the new position
       print ("You meet a", getLetter)
       printmatrix()
-    elif direction == 's':
+    elif direction == 's': # mobe player DOWN
       getLetter = matrix[x+1][y]  # gets the letter at the new position they're about to walk to
       matrix[x][y] = ' ' # makes the current position a space
       matrix[x+1][y] = '*' # draws the marker of where you are in the new position 
       print ("You meet a", getLetter)
       printmatrix()
-    elif direction == 'a':
-      print ("a")
-    elif direction == 'd':
+    elif direction == 'a': # move player LEFT
+      print ("a") 
+      getLetter = matrix[x][y-1]  # gets the letter at the new position they're about to walk to
+      matrix[x][y] = ' ' # makes the current position a space
+      matrix[x][y-1] = '*' # draws the marker of where you are in the new position 
+      print ("You meet a", getLetter)
+      printmatrix()
+    elif direction == 'd': # move player RIGHT
       print ("d")
       getLetter = matrix[x][y+1]  # gets the letter at the new position they're about to walk to
       matrix[x][y] = ' ' # makes the current position a space
