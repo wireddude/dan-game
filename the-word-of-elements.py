@@ -233,7 +233,12 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
       print ("a")
     elif direction == 'd':
       print ("d")
-
+      getLetter = matrix[x][y+1]  # gets the letter at the new position they're about to walk to
+      matrix[x][y] = ' ' # makes the current position a space
+      matrix[x][y+1] = '*' # draws the marker of where you are in the new position 
+      print ("You meet a", getLetter)
+      printmatrix()
+ 
       
 ## move player to appropriate square
 ## If H (hostile)  take durn, do battle
