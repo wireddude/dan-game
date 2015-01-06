@@ -209,42 +209,38 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
 ## find out where you are '*' matrix[0][1] for our purposes
 ## ask player what direction they want to go
 ## w = up, s = down, a = left, d = right
-    playerpos = getplayerpos()
-    printmatrix()
-    print('what direction do you want to go w=up, s=down, a=left, d=right')
-    direction = input()
-    print (direction)
-    x=playerpos[0]
-    y=playerpos[1]
-    if direction == 'w': # move player UP
-      print ("w") # make current playerpos blank ' ' and change location of '*' playerpos from playerpos[0][1] to playerpos [0][0] 
-      getLetter = matrix[x-1][y]  # gets the letter at the new position they're about to walk to
-      matrix[x][y] = ' ' # makes the current position a space
-      matrix[x-1][y] = '*' # draws the marker of where you are in the new position
-      print ("You meet a", getLetter)
-      printmatrix()
-    elif direction == 's': # mobe player DOWN
-      getLetter = matrix[x+1][y]  # gets the letter at the new position they're about to walk to
-      matrix[x][y] = ' ' # makes the current position a space
-      matrix[x+1][y] = '*' # draws the marker of where you are in the new position 
-      print ("You meet a", getLetter)
-      printmatrix()
-    elif direction == 'a': # move player LEFT
-      print ("a") 
-      getLetter = matrix[x][y-1]  # gets the letter at the new position they're about to walk to
-      matrix[x][y] = ' ' # makes the current position a space
-      matrix[x][y-1] = '*' # draws the marker of where you are in the new position 
-      print ("You meet a", getLetter)
-      printmatrix()
-    elif direction == 'd': # move player RIGHT
-      print ("d")
-      getLetter = matrix[x][y+1]  # gets the letter at the new position they're about to walk to
-      matrix[x][y] = ' ' # makes the current position a space
-      matrix[x][y+1] = '*' # draws the marker of where you are in the new position 
-      print ("You meet a", getLetter)
-      printmatrix()
- 
-      
+
+   playerpos = getplayerpos()
+
+
+   while (1):
+     printmatrix()
+     print('what direction do you want to go w=up, s=down, a=left, d=right')
+     direction = input()
+     print (direction)
+     row=playerpos[0]
+     col=playerpos[1]
+     if direction == 'w': # move player UP
+       getLetter = matrix[row-1][col]  # gets the letter at the new position they're about to walk to
+       matrix[row][col] = ' ' # makes the current position a space
+       matrix[row-1][col] = '*' # draws the marker of where you are in the new position
+       playerpos = (row-1,col)
+     elif direction == 's': # mobe player DOWN
+       getLetter = matrix[row+1][col]  # gets the letter at the new position they're about to walk to
+       matrix[row][col] = ' ' # makes the current position a space
+       matrix[row+1][col] = '*' # draws the marker of where you are in the new position 
+       playerpos = (row+1, col)
+     elif direction == 'a': # move player LEFT
+       getLetter = matrix[row][col-1]  # gets the letter at the new position they're about to walk to
+       matrix[row][col] = ' ' # makes the current position a space
+       matrix[row][col-1] = '*' # draws the marker of where you are in the new position 
+       playerpos = (row, col-1)
+     elif direction == 'd': # move player RIGHT
+       getLetter = matrix[row][col+1]  # gets the letter at the new position they're about to walk to
+       matrix[row][col] = ' ' # makes the current position a space
+       matrix[row][col+1] = '*' # draws the marker of where you are in the new position 
+       playerpos = (row, col+1)  
+    
 ## move player to appropriate square
 ## If H (hostile)  take durn, do battle
 ## If M for money add random number between 5-10 gold coins
@@ -254,19 +250,19 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
     
 
     
-    Attack_Result = dobattle() 
-    if Attack_Result == "You Win!":  ## if you win the fight, do all this
-        pStrength+= increment
-        print ("Your Strength has been incremented to ", pStrength)
-    elif Attack_Result == "You Lose!":
-        pStrength-= increment ## here, you lost the fight, but don't want to quit, you want to keep playing,
-        print ("You lost the battle and your strength reduced to: ", pStrength)
-        print ("Better luck next time!")
-    elif Attack_Result == "You Ran!":     #### Below you ran, so your strength is decremented by 1, but we're still in the active while loop.
-        pStrength-= 1 ## here, you lost the fight, but don't want to quit, you want to keep playing.
-        print ("Strength reduced by running: ", pStrength)
-    elif Attack_Result == "Quit":
-        break    
+   Attack_Result = dobattle() 
+   if Attack_Result == "You Win!":  ## if you win the fight, do all this
+       pStrength+= increment
+       print ("Your Strength has been incremented to ", pStrength)
+   elif Attack_Result == "You Lose!":
+       pStrength-= increment ## here, you lost the fight, but don't want to quit, you want to keep playing,
+       print ("You lost the battle and your strength reduced to: ", pStrength)
+       print ("Better luck next time!")
+   elif Attack_Result == "You Ran!":     #### Below you ran, so your strength is decremented by 1, but we're still in the active while loop.
+       pStrength-= 1 ## here, you lost the fight, but don't want to quit, you want to keep playing.
+       print ("Strength reduced by running: ", pStrength)
+   elif Attack_Result == "Quit":
+       break    
 
 print ("Out of Strength, Game Over!")
 
