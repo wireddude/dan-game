@@ -241,26 +241,26 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
     
 ## move player to appropriate square
 ## If H (hostile)  take durn, do battle
+   if getLetter == 'H':
+      Attack_Result = dobattle() 
+      if Attack_Result == "You Win!":  ## if you win the fight, do all this
+        pStrength+= increment
+        print ("Your Strength has been incremented to ", pStrength)
+      elif Attack_Result == "You Lose!":
+        pStrength-= increment ## here, you lost the fight, but don't want to quit, you want to keep playing,
+        print ("You lost the battle and your strength reduced to: ", pStrength)
+        print ("Better luck next time!")
+      elif Attack_Result == "You Ran!":     #### Below you ran, so your strength is decremented by 1, but we're still in the active while loop.
+        pStrength-= 1 ## here, you lost the fight, but don't want to quit, you want to keep playing.
+        print ("Strength reduced by running: ", pStrength)
+      elif Attack_Result == "Quit":
+        break    
+
 ## If M for money add random number between 5-10 gold coins
 ## If D for dimension a new world generates, they level up
 ## If P people you move to a random P
 ## If ' ' then nothing, take another turn   
     
-
-    
-   Attack_Result = dobattle() 
-   if Attack_Result == "You Win!":  ## if you win the fight, do all this
-       pStrength+= increment
-       print ("Your Strength has been incremented to ", pStrength)
-   elif Attack_Result == "You Lose!":
-       pStrength-= increment ## here, you lost the fight, but don't want to quit, you want to keep playing,
-       print ("You lost the battle and your strength reduced to: ", pStrength)
-       print ("Better luck next time!")
-   elif Attack_Result == "You Ran!":     #### Below you ran, so your strength is decremented by 1, but we're still in the active while loop.
-       pStrength-= 1 ## here, you lost the fight, but don't want to quit, you want to keep playing.
-       print ("Strength reduced by running: ", pStrength)
-   elif Attack_Result == "Quit":
-       break    
 
 print ("Out of Strength, Game Over!")
 
