@@ -13,11 +13,14 @@ import pickle
 import pygcurse
 import pygame
 
-win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
-print = win.pygprint
-input = win.input
-win.setscreencolors('white', 'black', clear=True)
-
+if (0):
+	    print ("In graphics mode")
+	    win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
+	    print = win.pygprint
+	    input = win.input
+	    win.setscreencolors('white', 'black', clear=True)
+else:
+	    print ("text mode")
 
 # Define the Players, Monsters, Weapons (later, move all this to a config file)
 hitpoints = 10
