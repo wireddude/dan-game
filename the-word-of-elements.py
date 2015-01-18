@@ -13,7 +13,10 @@ import pickle
 import pygcurse
 import pygame
 
-if (0):
+
+PYGCURSE_ENABLED=0
+
+if (PYGCURSE_ENABLED):
 	    print ("In graphics mode")
 	    win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
 	    print = win.pygprint
@@ -274,6 +277,9 @@ save_file = open ('save.dat', 'wb')
 pickle.dump(game_data, save_file)
 save_file.close()
 
-pygcurse.waitforkeypress()
 
+if (PYGCURSE_ENABLED):
+	pygcurse.waitforkeypress()
+else:
+	print ("Game Over")
 
