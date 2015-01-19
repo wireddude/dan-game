@@ -179,7 +179,7 @@ def dobattle() :
         print ("Quitting Game") ## later ask if they want to save, then also instrument a load previous progress
         return ("Quit")
 
-# welcome() ## display welcome message
+welcome() ## display welcome message
 
 ## Choose Player
 
