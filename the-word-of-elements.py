@@ -1,9 +1,10 @@
 # The Game of Elements v1.0
 # Authors: BlazeSlayer1234, WiredDude73
-# nogui branch
+# branch: master 
 
 # see http://inventwithpython.com/pygcurse/tutorial/ for more info
 # made this edit on kangtai.me
+
 
 import sys
 import random
