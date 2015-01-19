@@ -11,8 +11,8 @@ import random
 import os
 import time
 import pickle
-import pygcurse
-import pygame
+#import pygcurse
+#import pygame
 
 
 PYGCURSE_ENABLED=0
@@ -82,7 +82,7 @@ PlayerWeapon=Weapons[0]['Name']
 ## you start at the *
 
 matrix = [['H',' ','H',' ','H'], 
-          [' ','*','H','P',' '], 
+          ['M','*','H','P',' '], 
           ['P','H','H','H','P'], 
           ['H',' ','H',' ','M'], 
           [' ','H','H','P','D']]
@@ -203,7 +203,7 @@ print ("Strength: ", pStrength)
 #print ("Speed: ", pSpeed)
 #print ("Dexterity: ", pDexterity)
 #print ("Magic: ", pMagic)
-#print ("Gold Coins: ", pGold_Coins)
+print ("Gold Coins: ", pGold_Coins)
 #print ("Weapon Power: ", pWeaponPower)
 #print ("Weapon Enchanted: ", pWeaponEnchanted)
 
@@ -220,7 +220,7 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
 ## w = up, s = down, a = left, d = right
 
    printmatrix()
-   print('what direction do you want to go w=up, s=down, a=left, d=right')
+   print('what direction do you want to go w=up, s=down, a=left, d=right, q=quit')
    direction = input()
    print (direction)
    row=playerpos[0]
@@ -245,7 +245,9 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
      matrix[row][col] = ' ' # makes the current position a space
      matrix[row][col+1] = '*' # draws the marker of where you are in the new position 
      playerpos = (row, col+1)  
-    
+   elif direction == 'q' : # quit the game
+     break
+   
 ## move player to appropriate square
 ## If H (hostile)  take durn, do battle
    if getLetter == 'H':
@@ -262,6 +264,16 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
         print ("Strength reduced by running: ", pStrength)
       elif Attack_Result == "Quit":
         break    
+   elif getLetter == 'M':
+      pGold_Coins=pGold_Coins+10
+      print("10 More Gold Coins!")
+      print ("Gold Coins: ", pGold_Coins)
+   elif getLetter == 'D' :
+      print("You're going to a new Dimension, Level Up!")
+   elif getLetter == 'P':
+      print("You're gonna transport to a new square, haven't programmed it yet thought.")
+   elif getLetter==' ':
+      print("It's quiet here, you're safe!")
 
 ## If M for money add random number between 5-10 gold coins
 ## If D for dimension a new world generates, they level up
