@@ -4,7 +4,7 @@
 
 # see http://inventwithpython.com/pygcurse/tutorial/ for more info
 # made this edit on kangtai.me
-
+# made thie edit on my localbox
 
 import sys
 import random
