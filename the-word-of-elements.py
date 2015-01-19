@@ -3,7 +3,7 @@
 # nogui branch
 
 # see http://inventwithpython.com/pygcurse/tutorial/ for more info
-
+# made this edit on kangtai.me
 
 import sys
 import random
