@@ -271,7 +271,7 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
    elif getLetter == 'D' :
       print("You're going to a new Dimension, Level Up!")
    elif getLetter == 'P':
-      print("You're gonna transport to a new square, haven't programmed it yet thought.")
+      print("You're gonna transport to a new square, haven't programmed it yet though.")
    elif getLetter==' ':
       print("It's quiet here, you're safe!")
 
