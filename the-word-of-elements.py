@@ -11,6 +11,8 @@ import random
 import os
 import time
 import pickle
+from colorama import Fore
+
 #import pygcurse
 #import pygame
 
@@ -137,8 +139,8 @@ def welcome() :
     print("/_______  /|____/\___  >__|_|  /\___  >___|  /__| /____  >__")
     print("		\/           \/      \/     \/     \/          \/ \/")
     print ("-----------------------------------------------------------")
-    print("Welcome to the Game of Elements! Enter if you Dare! This Game was Created by BlazeSlayer1234 and Wireddude73 \n")
-    
+    print(Fore.RED + "Welcome to the Game of Elements! Enter if you Dare! This Game was Created by BlazeSlayer1234 and Wireddude73 \n")
+    print(Fore.RESET)
     
  
 
@@ -151,10 +153,11 @@ def dobattle() :
     random.shuffle(Monsters)
     tMonster = Monsters[0]['Name']
     tMonster_Strength = int(Monsters[0]['Strength'])
-    print ("-----------------------------------------------------")
+    print (Fore.RED + "-----------------------------------------------------")
     print ("You encounter a ", tMonster)
     print ("with a strenth of: ", tMonster_Strength)
     print ("Press f to fight, r to run, q to quit")
+    print (Fore.RESET)
     action = input()
     if action == 'r':
         print ("Running . . . ")
@@ -170,7 +173,7 @@ def dobattle() :
             return ("You Lose!")            
         ## at this point they didn't role a 1 or a 20 so we're just going my their strength comparison
         elif tMonster_Strength >= pStrength :
-            print ("You Lose!")
+            print (Fore.RED + "You Lose!" + Fore.RESET)
             return ("You Lose!")
         else:
             print ("You Win!")
@@ -199,13 +202,14 @@ pGold_Coins = Players[PlayerNameChoice]['Gold Coins']
 pWeaponPower = Weapons[0]['Power']
 pWeaponEnchanted = Weapons[0]['Enchanted']
 pStrength = pStrength + pWeaponPower
-print ("Strength: ", pStrength)
+print (Fore.RED + "Strength: ", pStrength)
 #print ("Speed: ", pSpeed)
 #print ("Dexterity: ", pDexterity)
 #print ("Magic: ", pMagic)
-print ("Gold Coins: ", pGold_Coins)
+print (Fore.YELLOW + "Gold Coins: ", pGold_Coins)
 #print ("Weapon Power: ", pWeaponPower)
 #print ("Weapon Enchanted: ", pWeaponEnchanted)
+print (Fore.RESET)
 
 playerpos = getplayerpos()
 
@@ -220,7 +224,7 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
 ## w = up, s = down, a = left, d = right
 
    printmatrix()
-   print('what direction do you want to go w=up, s=down, a=left, d=right, q=quit')
+   print(Fore.BLUE + 'what direction do you want to go w=up, s=down, a=left, d=right, q=quit'+ Fore.RESET)
    direction = input()
    print (direction)
    row=playerpos[0]
@@ -254,7 +258,8 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
       Attack_Result = dobattle() 
       if Attack_Result == "You Win!":  ## if you win the fight, do all this
         pStrength+= increment
-        print ("Your Strength has been incremented to ", pStrength)
+        print (Fore.RED + "Your Strength has been incremented to ", pStrength)
+        print (Fore.RESET)
       elif Attack_Result == "You Lose!":
         pStrength-= increment ## here, you lost the fight, but don't want to quit, you want to keep playing,
         print ("You lost the battle and your strength reduced to: ", pStrength)
@@ -281,7 +286,7 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
 ## If ' ' then nothing, take another turn   
     
 
-print ("Out of Strength, Game Over!")
+print (Fore.RED + "Out of Strength, Game Over!"+ Fore.RESET)
 
 ## stop here to save game status
 game_data = { 'time': Time, 'player-position' : 'N23 E25', 'pockets' : PlayerWeapon, 'player-name' : PlayerName, 'gold coins': pGold_Coins}
@@ -294,5 +299,5 @@ save_file.close()
 if (PYGCURSE_ENABLED):
 	pygcurse.waitforkeypress()
 else:
-	print ("Game Over")
+	print (Fore.RED + "Game Over" + Fore.RESET)
 
