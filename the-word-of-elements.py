@@ -92,7 +92,7 @@ matrix = [['H',' ','H',' ','H'],
 ## Print Matrix Out
 
 def printmatrix() :
-  print(' |-------------------|')
+  print(' +-------------------+')
   print(' | ' + matrix[0][0] + ' | ' + matrix[0][1] + ' | ' + matrix[0][2] + ' | ' + matrix[0][3] + ' | ' + matrix[0][4] + " | ")
   print(' |-------------------|')
   print(' | ' + matrix[1][0] + ' | ' + matrix[1][1] + ' | ' + matrix[1][2] + ' | ' + matrix[1][3] + ' | ' + matrix[1][4] + " | ")
@@ -102,7 +102,7 @@ def printmatrix() :
   print(' | ' + matrix[3][0] + ' | ' + matrix[3][1] + ' | ' + matrix[3][2] + ' | ' + matrix[3][3] + ' | ' + matrix[3][4] + " | ")
   print(' |-------------------|')
   print(' | ' + matrix[4][0] + ' | ' + matrix[4][1] + ' | ' + matrix[4][2] + ' | ' + matrix[4][3] + ' | ' + matrix[4][4] + " | ")
-  print(' |-------------------|')
+  print(' +-------------------+')
 
 def getplayerpos() :
   return (1,1)
@@ -271,8 +271,9 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
         break    
    elif getLetter == 'M':
       pGold_Coins=pGold_Coins+10
-      print("10 More Gold Coins!")
+      print(Fore.YELLOW + "10 More Gold Coins!")
       print ("Gold Coins: ", pGold_Coins)
+      print(Fore.RESET)
    elif getLetter == 'D' :
       print("You're going to a new Dimension, Level Up!")
    elif getLetter == 'P':
