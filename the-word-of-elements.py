@@ -13,8 +13,8 @@ import time
 import pickle
 from colorama import Fore
 
-#import pygcurse
-#import pygame
+import pygcurse
+import pygame
 
 
 PYGCURSE_ENABLED=0
