@@ -276,14 +276,16 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
       print(Fore.RESET)
    elif getLetter == 'D' :
       print("You're going to a new Dimension, Level Up!")
-   elif getLetter == 'P':    ## there's still a bug here, I need to remove the '*' from the current spot.
+   elif getLetter == 'P':   
       print("You're gonna transport to a new area, hold on to your hats!!")
-      matrix[row][col] = ' ' # makes the current position a space
+      # print (row, col) # previous pos
+      # print (playerpos) # current pos
+      matrix[playerpos[0]][playerpos[1]] = ' ' # makes the current position a space
       portal_row = random.randrange(0,4)
       portal_col = random.randrange(0,4)
       playerpos = (portal_row, portal_col)
-      matrix[portal_row][portal_col]='*'
-      print (playerpos)
+      matrix[portal_row][portal_col]='*' # new randomized portal position dropped you here. 
+      print ("You\'ve moved to position ", playerpos)
    elif getLetter==' ':
       print("It's quiet here, you're safe!")
 
