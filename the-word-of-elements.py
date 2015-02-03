@@ -4,7 +4,7 @@
 
 # see http://inventwithpython.com/pygcurse/tutorial/ for more info
 # made this edit on kangtai.me
-# made thie edit on my localbox
+# made thie edit on my localbox, using BBEdit trial version
 
 import sys
 import random
@@ -276,8 +276,14 @@ while (pStrength > 0) :              ## as long as you have some strength, do al
       print(Fore.RESET)
    elif getLetter == 'D' :
       print("You're going to a new Dimension, Level Up!")
-   elif getLetter == 'P':
-      print("You're gonna transport to a new square, haven't programmed it yet though.")
+   elif getLetter == 'P':    ## there's still a bug here, I need to remove the '*' from the current spot.
+      print("You're gonna transport to a new area, hold on to your hats!!")
+      matrix[row][col] = ' ' # makes the current position a space
+      portal_row = random.randrange(0,4)
+      portal_col = random.randrange(0,4)
+      playerpos = (portal_row, portal_col)
+      matrix[portal_row][portal_col]='*'
+      print (playerpos)
    elif getLetter==' ':
       print("It's quiet here, you're safe!")
 
