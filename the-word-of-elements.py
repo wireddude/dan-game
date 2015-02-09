@@ -31,6 +31,7 @@ else:
 # Define the Players, Monsters, Weapons (later, move all this to a config file)
 hitpoints = 10
 increment = 9
+GoldCoins = 0
 
 # time check
 Time = time.asctime()
@@ -39,15 +40,15 @@ SaveFilePresent =  os.path.isfile("save.dat")
 
   
 Players = [
-     {'Name':'Kuruto','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Gold Coins': 100, 'Hit Points': hitpoints },
-     {'Name':'Tom','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Gold Coins': 100, 'Hit Points': hitpoints } ,
-     {'Name':'Jack','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57, 'Gold Coins': 100 , 'Hit Points': hitpoints},
-     {'Name':'Nathaniel','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Gold Coins': 100, 'Hit Points': hitpoints },
-     {'Name':'Kibou','Strength': 290, 'Speed':290, 'Magic':30,'Dexterity': 10, 'Gold Coins': 50 , 'Hit Points': hitpoints } ,
-     {'Name':'David the Wimp','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Gold Coins': 100, 'Hit Points': hitpoints },
-     {'Name':'Jerry','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Gold Coins': 100, 'Hit Points': hitpoints },
-     {'Name':'Noah','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Gold Coins': 100, 'Hit Points': hitpoints },
-     {'Name':'Jordan','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Gold Coins': 100 , 'Hit Points': hitpoints } ]
+     {'Name':'Kuruto','Strength': 75, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Gold Coins': GoldCoins, 'Hit Points': hitpoints },
+     {'Name':'Tom','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 29, 'Gold Coins': GoldCoins, 'Hit Points': hitpoints } ,
+     {'Name':'Jack','Strength': 15, 'Speed': 96, 'Magic': 57, 'Dexterity': 57, 'Gold Coins': GoldCoins , 'Hit Points': hitpoints},
+     {'Name':'Nathaniel','Strength': 35, 'Speed': 86, 'Magic': 77, 'Dexterity': 9, 'Gold Coins': GoldCoins, 'Hit Points': hitpoints },
+     {'Name':'Kibou','Strength': 290, 'Speed':290, 'Magic':30,'Dexterity': 10, 'Gold Coins': GoldCoins , 'Hit Points': hitpoints } ,
+     {'Name':'David the Wimp','Strength': 3, 'Speed': 21, 'Magic': 60, 'Dexterity': 39, 'Gold Coins': GoldCoins, 'Hit Points': hitpoints },
+     {'Name':'Jerry','Strength': 2, 'Speed': 91, 'Magic': 70, 'Dexterity': 49, 'Gold Coins': GoldCoins, 'Hit Points': hitpoints },
+     {'Name':'Noah','Strength': 100, 'Speed': 34, 'Magic': 80, 'Dexterity': 69, 'Gold Coins': GoldCoins, 'Hit Points': hitpoints },
+     {'Name':'Jordan','Strength': 67, 'Speed': 43, 'Magic': 100, 'Dexterity': 99, 'Gold Coins': GoldCoins , 'Hit Points': hitpoints } ]
     
 Monsters = [
      {'Name':'Creeper','Strength': 51, 'Speed': 56, 'Magic': 27, 'Dexterity': 89, 'Hit Points': hitpoints },
