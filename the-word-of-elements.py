@@ -64,13 +64,14 @@ Monsters = [
 Weapons = [
      {'Name': 'Simple Sword', 'Power': 38, 'Enchanted': 'FALSE'},
      {'Name': 'Enchanted Sword', 'Power': 78, 'Enchanted': 'TRUE'},
+     {'Name': 'Anti-Gravity Gun', 'Power': 257, 'Enchanted': 'TRUE'},
      {'Name': 'First Shotgun', 'Power': 55, 'Enchanted': 'FALSE'},
      {'Name': 'Stop Shield', 'Power': 23, 'Enchanted': 'FALSE'},
      {'Name': 'Dagger', 'Power': 23, 'Enchanted': 'FALSE'},
      {'Name': 'Hand and a Half Sword', 'Power': 8, 'Enchanted': 'FALSE'},
      {'Name': 'Laser Gun', 'Power': 89, 'Enchanted': 'FALSE'} ,
      {'Name': 'Forcefield', 'Power': 56, 'Enchanted': 'FALSE'} ,
-     {'Name': 'Axe', 'Power': 66, 'Enchanted': 'FALSE'} ]
+     {'Name': 'Axe', 'Power': 66, 'Enchanted': 'FALSE'} ] 
 
 NumPlayers = len (Players) -1
 NumMonsters = len (Monsters) -1
