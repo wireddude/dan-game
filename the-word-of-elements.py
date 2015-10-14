@@ -7,6 +7,7 @@
 # see http://inventwithpython.com/pygcurse/tutorial/ for more info
 # made this edit on kangtai.me
 # made thie edit on my localbox, using BBEdit trial version
+# added this line from onion client
 
 import sys
 import random
