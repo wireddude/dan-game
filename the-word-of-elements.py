@@ -16,20 +16,20 @@ import time
 import pickle
 from colorama import Fore
 
-import pygcurse
-import pygame
+#import pygcurse
+#import pygame
 
 
-PYGCURSE_ENABLED=0
+#PYGCURSE_ENABLED=0
 
-if (PYGCURSE_ENABLED):
-	    print ("In graphics mode")
-	    win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
-	    print = win.pygprint
-	    input = win.input
-	    win.setscreencolors('white', 'black', clear=True)
-else:
-	    print ("text mode")
+#if (PYGCURSE_ENABLED):
+#	    print ("In graphics mode")
+#	    win = pygcurse.PygcurseWindow(80, 50, 'The World Of Elements')
+#	    print = win.pygprint
+#	    input = win.input
+#	    win.setscreencolors('white', 'black', clear=True)
+#else:
+#	    print ("text mode")
 
 # Define the Players, Monsters, Weapons (later, move all this to a config file)
 hitpoints = 10
