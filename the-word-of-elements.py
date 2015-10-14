@@ -8,6 +8,7 @@
 # made this edit on kangtai.me
 # made thie edit on my localbox, using BBEdit trial version
 # added this line from onion client
+# testing git pull on onion
 
 import sys
 import random
