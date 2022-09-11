@@ -1,4 +1,4 @@
-# The Game of Elements v1.0.0
+# The Game of Elements v1.0.1
 # Authors: BlazeSlayer1234, WiredDude73
 # branch: master 
 
